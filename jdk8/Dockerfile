@@ -1,8 +1,8 @@
 FROM openjdk:8-jdk-alpine
 
-ARG NODE_VERSION=v6.1.0
+ARG NODE_VERSION=v5.9.1
 ARG J2V8_VERSION=v4.5.0
-ARG NODE_HASH=9e67ef0b8611e16e6e311eccf0489a50fe76ceebeea3023ef4f51be647ae4bc3
+ARG NODE_HASH=9bfa882ba832c526add1f939121c79d95b9c592785ec8afe043086a0c7a30c18
 ARG J2V8_HASH=27f103acaf4870f57e070f642afff33acd5b55c5e0d8866d8c4a65cfd1537ab5
 
 RUN apk add --no-cache --virtual build-dependencies alpine-sdk python linux-headers binutils-gold && \
@@ -52,8 +52,8 @@ RUN apk add --no-cache --virtual build-dependencies alpine-sdk python linux-head
         -lrt -z noexecstack && \
     strip libj2v8_linux_x86_64.so && \
 
-    # copy J2V8 library to Java lib directory
-    cp libj2v8_linux_x86_64.so ${JAVA_HOME}/lib && \
+    # copy J2V8 library to libs
+    cp libj2v8_linux_x86_64.so /usr/lib && \
 
     # cleanup
     apk del build-dependencies && \
