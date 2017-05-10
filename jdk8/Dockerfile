@@ -1,9 +1,9 @@
 FROM openjdk:8-jdk-alpine
 
 ARG NODE_VERSION=v5.9.1
-ARG J2V8_VERSION=v4.5.0
+ARG J2V8_VERSION=9d6ab7fcbed53c1b518c9d547e1fc2480c8da0ba
 ARG NODE_HASH=9bfa882ba832c526add1f939121c79d95b9c592785ec8afe043086a0c7a30c18
-ARG J2V8_HASH=27f103acaf4870f57e070f642afff33acd5b55c5e0d8866d8c4a65cfd1537ab5
+ARG J2V8_HASH=75bbd078aecb5c8aa755a5d502e7d4cab5f6de32b67455eff2872760c40b0c1f
 
 RUN apk add --no-cache --virtual build-dependencies alpine-sdk python linux-headers binutils-gold && \
 
