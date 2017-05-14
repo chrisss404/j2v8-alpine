@@ -35,19 +35,19 @@ RUN apk add --no-cache --virtual build-dependencies alpine-sdk python linux-head
         -I ${JAVA_HOME} \
         -I ${JAVA_HOME}/linux \
         com_eclipsesource_v8_V8Impl.cpp -std=c++11 -fPIC -shared -o libj2v8_linux_x86_64.so \
-        -Wl,--whole-archive ../../node/out/Release/libnode.a \
+        -Wl,--whole-archive /build/node/out/Release/obj.target/libnode.a \
         -Wl,--no-whole-archive \
         -Wl,--start-group \
-            /build/node/out/Release/libv8_libbase.a \
-            /build/node/out/Release/libv8_libplatform.a \
-            /build/node/out/Release/libv8_base.a \
-            /build/node/out/Release/libv8_nosnapshot.a \
-            /build/node/out/Release/libuv.a \
-            /build/node/out/Release/libopenssl.a \
-            /build/node/out/Release/libhttp_parser.a \
-            /build/node/out/Release/libgtest.a \
-            /build/node/out/Release/libzlib.a \
-            /build/node/out/Release/libcares.a \
+            /build/node/out/Release/obj.target/deps/v8/src/libv8_libbase.a \
+            /build/node/out/Release/obj.target/deps/v8/src/libv8_libplatform.a \
+            /build/node/out/Release/obj.target/deps/v8/src/libv8_base.a \
+            /build/node/out/Release/obj.target/deps/v8/src/libv8_nosnapshot.a \
+            /build/node/out/Release/obj.target/deps/uv/libuv.a \
+            /build/node/out/Release/obj.target/deps/openssl/libopenssl.a \
+            /build/node/out/Release/obj.target/deps/http_parser/libhttp_parser.a \
+            /build/node/out/Release/obj.target/deps/gtest/libgtest.a \
+            /build/node/out/Release/obj.target/deps/zlib/libzlib.a \
+            /build/node/out/Release/obj.target/deps/cares/libcares.a \
         -Wl,--end-group \
         -lrt -z noexecstack && \
     strip --strip-unneeded -R .note -R .comment libj2v8_linux_x86_64.so && \
