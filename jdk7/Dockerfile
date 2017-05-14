@@ -50,7 +50,7 @@ RUN apk add --no-cache --virtual build-dependencies alpine-sdk python linux-head
             /build/node/out/Release/libcares.a \
         -Wl,--end-group \
         -lrt -z noexecstack && \
-    strip libj2v8_linux_x86_64.so && \
+    strip --strip-unneeded -R .note -R .comment libj2v8_linux_x86_64.so && \
 
     # copy J2V8 library to libs
     cp libj2v8_linux_x86_64.so /usr/lib && \
