@@ -1,9 +1,9 @@
 FROM openjdk:8-jdk-alpine
 
-ARG NODE_VERSION=v7.4.0
-ARG J2V8_VERSION=3a89c4d1adaa9e6dd7eec783cb2404668f725b57
-ARG NODE_HASH=69b76c86e6fc9914fa136089d8c28a4828c14aa8792cbdf946090a5a2afd25b6
-ARG J2V8_HASH=435bb3db2f8713f8d263df25af1fb4e9cc5eb11a32cec6bda81989e37fd6a424
+ARG NODE_VERSION=v5.9.1
+ARG J2V8_VERSION=9d6ab7fcbed53c1b518c9d547e1fc2480c8da0ba
+ARG NODE_HASH=9bfa882ba832c526add1f939121c79d95b9c592785ec8afe043086a0c7a30c18
+ARG J2V8_HASH=75bbd078aecb5c8aa755a5d502e7d4cab5f6de32b67455eff2872760c40b0c1f
 
 RUN apk add --no-cache --virtual build-dependencies wget tar make gcc g++ python linux-headers binutils-gold && \
 
@@ -40,19 +40,19 @@ RUN apk add --no-cache --virtual build-dependencies wget tar make gcc g++ python
         -I ${JAVA_HOME} \
         -I ${JAVA_HOME}/linux \
         com_eclipsesource_v8_V8Impl.cpp -std=c++11 -fPIC -shared -o libj2v8_linux_x86_64.so \
-        -Wl,--whole-archive /build/node/out/Release/obj.target/libnode.a \
+        -Wl,--whole-archive /build/node/out/Release/libnode.a \
         -Wl,--no-whole-archive \
         -Wl,--start-group \
-            /build/node/out/Release/obj.target/deps/v8/src/libv8_libbase.a \
-            /build/node/out/Release/obj.target/deps/v8/src/libv8_libplatform.a \
-            /build/node/out/Release/obj.target/deps/v8/src/libv8_base.a \
-            /build/node/out/Release/obj.target/deps/v8/src/libv8_nosnapshot.a \
-            /build/node/out/Release/obj.target/deps/uv/libuv.a \
-            /build/node/out/Release/obj.target/deps/openssl/libopenssl.a \
-            /build/node/out/Release/obj.target/deps/http_parser/libhttp_parser.a \
-            /build/node/out/Release/obj.target/deps/gtest/libgtest.a \
-            /build/node/out/Release/obj.target/deps/zlib/libzlib.a \
-            /build/node/out/Release/obj.target/deps/cares/libcares.a \
+            /build/node/out/Release/libv8_libbase.a \
+            /build/node/out/Release/libv8_libplatform.a \
+            /build/node/out/Release/libv8_base.a \
+            /build/node/out/Release/libv8_nosnapshot.a \
+            /build/node/out/Release/libuv.a \
+            /build/node/out/Release/libopenssl.a \
+            /build/node/out/Release/libhttp_parser.a \
+            /build/node/out/Release/libgtest.a \
+            /build/node/out/Release/libzlib.a \
+            /build/node/out/Release/libcares.a \
         -Wl,--end-group \
         -lrt -z noexecstack -D NODE_COMPATIBLE=1 && \
     strip --strip-unneeded -R .note -R .comment libj2v8_linux_x86_64.so && \
